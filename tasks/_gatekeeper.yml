@@ -1,0 +1,39 @@
+---
+- name: Create the gatekeeper user
+  tags: [gatekeeper]
+  user:
+    name: '{{ gatekeeper_name }}'
+    state: present
+    password: '{{ gatekeeper_password }}'
+    groups: sudo
+    shell: /bin/bash
+    comment: The Almighty Gatekeeper
+
+- name: Add authorized SSH public keys for the gatekeeper
+  tags: [gatekeeper]
+  authorized_key:
+    user: '{{ gatekeeper_name }}'
+    key: "{{ lookup('file', item) }}"
+    state: present
+  with_items: gatekeeper_public_keys
+
+- name: Upload some custom config files to gatekeeper's home
+  tags: [gatekeeper]
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: '{{ gatekeeper_name }}'
+    group: '{{ gatekeeper_name }}'
+  with_items:
+    - { src: home/gatekeeper/.bashrc, dest: '/home/{{ gatekeeper_name }}/.bashrc' }
+    - { src: home/gatekeeper/.vimrc, dest: '/home/{{ gatekeeper_name }}/.vimrc' }
+
+- name: Upload some custom config templates
+  tags: [gatekeeper]
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+  with_items:
+    - { src: etc/ssh/sshd_config, dest: /etc/ssh/sshd_config }
+  notify:
+    - Restart SSH

@@ -1,0 +1,6 @@
+---
+- hosts: testing
+  roles:
+    - role: ansible-role-ubuntu-secure
+      gatekeeper_name: fabien
+      gatekeeper_password: '$6$rounds=656000$LT2wBLbey6VonMTb$yRJXz5XmoZ8dqf6UZiiPz0DS/2ZOYcX96rLarypJqyPeihasUu4Zo1cnPFw8t3sIMQnD/4uDSnUwyTNi3MK2F.' # test
