@@ -1,0 +1,12 @@
+---
+- name: Activate unattended upgrades
+  tags: [automatic_updates]
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    mode: 0644
+  with_items:
+    - { src: etc/apt/apt.conf.d/00CDMountPoint, dest: /etc/apt/apt.conf.d/00CDMountPoint }
+    - { src: etc/apt/apt.conf.d/00trustcdrom, dest: /etc/apt/apt.conf.d/00trustcdrom }
+    - { src: etc/apt/apt.conf.d/10periodic, dest: /etc/apt/apt.conf.d/10periodic }
+    - { src: etc/apt/apt.conf.d/50unattended-upgrades, dest: /etc/apt/apt.conf.d/50unattended-upgrades }
