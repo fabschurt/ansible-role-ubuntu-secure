@@ -6,6 +6,10 @@ This role will create a user that will become the only point of entry on the
 targeted hosts. For convenience' sake (and because it's awesome), this user will
 be referred to as the *gatekeeper* as of now.
 
+Full compatibility has been tested on **Ubuntu 14.04** only, as it's the distrib
+I use for pretty much everything, but I guess this should work fine on later
+versions too, and on not-too-old earlier versions.
+
 **BE CAREFUL**, once you've applied this role, the targeted hosts will be accessible
 by the gatekeeper user only, with public key authentication only (root login and
 password authentication will be disabled). You will have to change your inventory
@@ -14,9 +18,6 @@ and/or command line options to take this into account.
 This role is continuously integrated on [Travis](https://travis-ci.org/fabschurt/ansible-role-ubuntu-secure).
 For now, it's simply syntax-checked against multiple Ansible versions, to check
 for basic compatibility.
-
-It's been tested against **Ubuntu 14.04**, but should work on earlier and later
-versions, as there's nothing really 14.04-specific in there.
 
 ## Requirements
 
