@@ -1,6 +1,18 @@
 ---
+- name: Disable IPv6 (for now)
+  tags: [misc]
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    mode: 0644
+  with_items:
+    - { src: etc/sysctl.conf, dest: /etc/sysctl.conf }
+    - { src: etc/modprobe.d/blacklist.conf, dest: /etc/modprobe.d/blacklist.conf }
+  notify:
+    - Restart networking
+
 - name: Activate unattended upgrades
-  tags: [automatic_updates]
+  tags: [misc]
   copy:
     src: '{{ item.src }}'
     dest: '{{ item.dest }}'

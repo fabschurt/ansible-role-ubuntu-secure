@@ -15,6 +15,8 @@ by the gatekeeper user only, with public key authentication only (root login and
 password authentication will be disabled). You will have to change your inventory
 and/or command line options to take this into account.
 
+It's recommended that you reboot the targeted server(s) after applying this role.
+
 This role is continuously integrated on [Travis](https://travis-ci.org/fabschurt/ansible-role-ubuntu-secure).
 For now, it's simply syntax-checked against multiple Ansible versions, to check
 for basic compatibility.
