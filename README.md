@@ -30,6 +30,7 @@ for basic compatibility.
 
 This role is configurable with the following variables:
 
+* `sshd_port`: the TCP port the SSH server should listen to
 * `gatekeeper_name`: the gatekeeper's username
 * `gatekeeper_password`: the gatekeeper's password (to be able to `sudo`)
 * `gatekeeper_public_keys`: a list of local paths to public key files that will

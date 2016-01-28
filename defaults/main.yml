@@ -1,4 +1,5 @@
 ---
+sshd_port: 22
 gatekeeper_name: gatekeeper
 gatekeeper_password: ''
 gatekeeper_public_keys: [~/.ssh/id_rsa.pub]
