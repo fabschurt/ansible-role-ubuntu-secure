@@ -11,7 +11,7 @@
   notify:
     - Restart networking
 
-- name: Activate unattended upgrades
+- name: Activate unattended upgrades (and disable CD-ROM in APT)
   tags: [misc]
   copy:
     src: '{{ item.src }}'
