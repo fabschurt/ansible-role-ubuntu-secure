@@ -1,0 +1,17 @@
+---
+- name: Disable IPv6 (for now)
+  tags: [config]
+  copy:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    mode: '{{ item.mode }}'
+  with_items:
+    - { src: etc/sudoers, dest: /etc/sudoers, mode: '0440' }
+    - { src: etc/sysctl.conf, dest: /etc/sysctl.conf, mode: '0644' }
+    - { src: etc/modprobe.d/blacklist.conf, dest: /etc/modprobe.d/blacklist.conf, mode: '0644' }
+    - { src: etc/apt/apt.conf.d/00CDMountPoint, dest: /etc/apt/apt.conf.d/00CDMountPoint, mode: '0644' }
+    - { src: etc/apt/apt.conf.d/00trustcdrom, dest: /etc/apt/apt.conf.d/00trustcdrom, mode: '0644' }
+    - { src: etc/apt/apt.conf.d/10periodic, dest: /etc/apt/apt.conf.d/10periodic, mode: '0644' }
+    - { src: etc/apt/apt.conf.d/50unattended-upgrades, dest: /etc/apt/apt.conf.d/50unattended-upgrades, mode: '0644' }
+  notify:
+    - Restart networking
