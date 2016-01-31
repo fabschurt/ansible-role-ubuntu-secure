@@ -69,6 +69,9 @@ PrintLastLog yes
 TCPKeepAlive yes
 #UseLogin no
 
+ClientAliveCountMax 0
+ClientAliveInterval 300
+
 MaxStartups {{ sshd_max_startups }}
 #Banner /etc/issue.net
 
