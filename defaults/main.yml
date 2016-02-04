@@ -1,6 +1,6 @@
 ---
 sshd_port: 22
-sshd_max_startups: 5:30:10
+sshd_max_startups: 5:50:10
 gatekeeper_name: gatekeeper
 gatekeeper_password: ''
 gatekeeper_public_keys: [~/.ssh/id_rsa.pub]
