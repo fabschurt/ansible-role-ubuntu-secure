@@ -1,5 +1,5 @@
 ---
-- name: Disable IPv6 (for now)
+- name: Upload some custom config files
   tags: [config]
   copy:
     src: '{{ item.src }}'
@@ -15,3 +15,14 @@
     - { src: etc/apt/apt.conf.d/50unattended-upgrades, dest: /etc/apt/apt.conf.d/50unattended-upgrades, mode: '0644' }
   notify:
     - Restart networking
+
+- name: Upload some custom config templates
+  tags: [config]
+  template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    mode: '{{ item.mode }}'
+  with_items:
+    - { src: etc/network/if-pre-up.d/iptables, dest: /etc/network/if-pre-up.d/iptables, mode: '0755' }
+  notify:
+    - Restart network interfaces

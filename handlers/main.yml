@@ -8,3 +8,8 @@
   service:
     name: networking
     state: restarted
+
+- name: Restart network interfaces
+  shell: 'ifdown {{ item }} && ifup {{ item }}'
+  with_items: ansible_interfaces
+  when: item|match('^eth\d+$')
