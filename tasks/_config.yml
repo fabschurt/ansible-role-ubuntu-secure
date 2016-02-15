@@ -13,6 +13,7 @@
     - { src: etc/apt/apt.conf.d/00trustcdrom, dest: /etc/apt/apt.conf.d/00trustcdrom, mode: '0644' }
     - { src: etc/apt/apt.conf.d/10periodic, dest: /etc/apt/apt.conf.d/10periodic, mode: '0644' }
     - { src: etc/apt/apt.conf.d/50unattended-upgrades, dest: /etc/apt/apt.conf.d/50unattended-upgrades, mode: '0644' }
+    - { src: etc/default/grub, dest: /etc/default/grub, mode: '0644'}
 
 - name: Upload custom config templates
   tags: [config]
@@ -22,3 +23,7 @@
     mode: '{{ item.mode }}'
   with_items:
     - { src: etc/network/if-pre-up.d/iptables, dest: /etc/network/if-pre-up.d/iptables, mode: '0755' }
+
+- name: Update GRUB config
+  tags: [config]
+  shell: update-grub2 || update-grub
