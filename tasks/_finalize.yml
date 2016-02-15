@@ -1,0 +1,4 @@
+---
+- name: Final reboot (root user will be locked out)
+  tags: [finalize]
+  shell: reboot
