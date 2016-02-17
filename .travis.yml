@@ -14,8 +14,6 @@ install:
 
 before_script:
   - echo 'testing ansible_ssh_host=localhost' > tests/hosts
-  - printf '[defaults]\ninventory=tests/hosts\nroles_path=..' > ansible.cfg
-  - ansible --version
 
 script:
-  - ansible-playbook tests/playbook.yml --syntax-check
+  - ansible-playbook -i tests/hosts --syntax-check tests/playbook.yml
