@@ -1,12 +1,12 @@
 ---
-sshd_port: 22
+ubuntu_secure_sshd_port: 22
 
-sshd_max_startups: 5:50:10
+ubuntu_secure_sshd_max_startups: 5:50:10
 
-iptables_additional_rules: ''
+ubuntu_secure_iptables_additional_rules: ''
 
-gatekeeper_name: gatekeeper
+ubuntu_secure_gatekeeper_name: gatekeeper
 
-gatekeeper_password: ''
+ubuntu_secure_gatekeeper_password: ''
 
-gatekeeper_public_keys: [~/.ssh/id_rsa.pub]
+ubuntu_secure_gatekeeper_public_keys: [~/.ssh/id_rsa.pub]

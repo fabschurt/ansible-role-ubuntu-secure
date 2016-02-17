@@ -2,7 +2,7 @@
 # See the sshd_config(5) manpage for details
 
 # What ports, IPs and protocols we listen for
-Port {{ sshd_port }}
+Port {{ ubuntu_secure_sshd_port }}
 # Use these options to restrict which interfaces/protocols sshd will bind to
 #ListenAddress ::
 #ListenAddress 0.0.0.0
@@ -27,7 +27,7 @@ LogLevel INFO
 LoginGraceTime 60
 PermitRootLogin no
 StrictModes yes
-AllowUsers {{ gatekeeper_name }}
+AllowUsers {{ ubuntu_secure_gatekeeper_name }}
 
 RSAAuthentication yes
 PubkeyAuthentication yes
@@ -72,7 +72,7 @@ TCPKeepAlive yes
 ClientAliveCountMax 0
 ClientAliveInterval 300
 
-MaxStartups {{ sshd_max_startups }}
+MaxStartups {{ ubuntu_secure_sshd_max_startups }}
 #Banner /etc/issue.net
 
 # Allow client to pass locale environment variables

@@ -30,11 +30,12 @@ for basic compatibility.
 
 This role is configurable with the following variables:
 
-* `sshd_port`: the TCP port the SSH server should listen to
-* `gatekeeper_name`: the gatekeeper's username
-* `gatekeeper_password`: the gatekeeper's password (to be able to `sudo`)
-* `gatekeeper_public_keys`: a list of local paths to public key files that will
-  be copied to the gatekeeper's `authorized_keys` file
+* `ubuntu_secure_sshd_port`: the TCP port the SSH server should listen to
+* `ubuntu_secure_gatekeeper_name`: the gatekeeper's username
+* `ubuntu_secure_gatekeeper_password`: the gatekeeper's password (to be able
+  to `sudo`)
+* `ubuntu_secure_gatekeeper_public_keys`: a list of local paths to public key
+  files that will be copied to the gatekeeper's `authorized_keys` file
 
 See the **Example playbook** section below for a reference of these variables'
 default values.
@@ -49,12 +50,12 @@ The variable values used here reflect the default values declared in `defaults/m
 - hosts: servers
   roles:
     - role: ansible-role-ubuntu-secure
-      gatekeeper_name: gatekeeper
-      gatekeeper_password: '' # You should really override this one, otherwise you won't be able to sudo
-      gatekeeper_public_keys: [~/.ssh/id_rsa.pub]
+      ubuntu_secure_gatekeeper_name: gatekeeper
+      ubuntu_secure_gatekeeper_password: '' # You should really override this one, otherwise you won't be able to sudo
+      ubuntu_secure_gatekeeper_public_keys: [~/.ssh/id_rsa.pub]
 ```
 
-The `gatekeeper_password` value should be has to be in an encrypted form,
+The `ubuntu_secure_gatekeeper_password` value should be has to be in an encrypted form,
 see [here](http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module)
 for help.
 

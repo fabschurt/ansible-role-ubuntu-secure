@@ -2,9 +2,9 @@
 - name: Create the gatekeeper user
   tags: [gatekeeper]
   user:
-    name: '{{ gatekeeper_name }}'
+    name: '{{ ubuntu_secure_gatekeeper_name }}'
     state: present
-    password: '{{ gatekeeper_password }}'
+    password: '{{ ubuntu_secure_gatekeeper_password }}'
     groups: sudo
     shell: /bin/bash
     comment: The Almighty Gatekeeper
@@ -12,18 +12,18 @@
 - name: Add authorized SSH public keys for the gatekeeper
   tags: [gatekeeper]
   authorized_key:
-    user: '{{ gatekeeper_name }}'
+    user: '{{ ubuntu_secure_gatekeeper_name }}'
     key: "{{ lookup('file', item) }}"
     state: present
-  with_items: gatekeeper_public_keys
+  with_items: ubuntu_secure_gatekeeper_public_keys
 
 - name: Upload custom dotfiles to gatekeeper's home
   tags: [gatekeeper]
   copy:
     src: home/gatekeeper/
-    dest: '/home/{{ gatekeeper_name }}'
-    owner: '{{ gatekeeper_name }}'
-    group: '{{ gatekeeper_name }}'
+    dest: '/home/{{ ubuntu_secure_gatekeeper_name }}'
+    owner: '{{ ubuntu_secure_gatekeeper_name }}'
+    group: '{{ ubuntu_secure_gatekeeper_name }}'
 
 - name: Upload custom sshd config
   tags: [gatekeeper]

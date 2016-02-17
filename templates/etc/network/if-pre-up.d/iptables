@@ -45,7 +45,7 @@ iptables -A INPUT  -m hashlimit --hashlimit-name UDP_INPUT_FLOOD  --hashlimit-ab
 iptables -A OUTPUT -m hashlimit --hashlimit-name UDP_OUTPUT_FLOOD --hashlimit-above 100/second --hashlimit-burst 1 -j DROP
 
 # Authorized INPUT requests
-iptables -A INPUT -p tcp --dport {{ sshd_port }} -j ACCEPT # SSH
+iptables -A INPUT -p tcp --dport {{ ubuntu_secure_sshd_port }} -j ACCEPT # SSH
 
 # Authorized OUTPUT requests
 iptables -A OUTPUT -p tcp --dport 22   -j ACCEPT # SSH
@@ -62,7 +62,7 @@ iptables -A OUTPUT -p tcp --dport 953  -j ACCEPT # rDNS (TCP)
 iptables -A OUTPUT -p udp --dport 953  -j ACCEPT # rDNS (UDP)
 iptables -A OUTPUT -p udp --dport 5353 -j ACCEPT # mDNS
 
-{{ iptables_additional_rules }}
+{{ ubuntu_secure_iptables_additional_rules }}
 
 # Exit cleanly, or the server will hang during booting
 exit 0
