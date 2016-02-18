@@ -24,6 +24,7 @@
     dest: '/home/{{ ubuntu_secure_gatekeeper_name }}'
     owner: '{{ ubuntu_secure_gatekeeper_name }}'
     group: '{{ ubuntu_secure_gatekeeper_name }}'
+    mode: 0600
 
 - name: Upload custom sshd config
   tags: [gatekeeper]
