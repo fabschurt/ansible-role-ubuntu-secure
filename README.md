@@ -2,24 +2,30 @@
 
 [![Travis CI](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/fabschurt/ansible-role-ubuntu-secure)
 
-This role will create a user that will become the only point of entry on the
-targeted hosts. For convenience' sake (and because it's awesome), this user will
-be referred to as the *gatekeeper* as of now.
+This Ansible role aims at securing a Ubuntu box as much as possible, without
+hindering performance or flexibility too much. The choices made here are
+inevitably biased and opinionated, but I'd gladly study proposals to make
+this role more universal.
 
-Full compatibility has been tested on **Ubuntu 14.04** only, as it's the distrib
-I use for pretty much everything, but I guess this should work fine on later
-versions too, and on not-too-old earlier versions.
+Full compatibility has been tested on **Ubuntu 14.04**, but I guess it should
+work fine with later and (not too old) earlier versions too.
 
-**BE CAREFUL**, once you've applied this role, the targeted hosts will be accessible
+There's still a lot of work to do, but we've got a good start here. For now,
+this role will basically:
+
+* enable APT unattended upgrades (`security` and `updates` channels)
+* completely disable IPv6 support (that will be kind of controversial I guess)
+* create a non-root (but *sudoer*) master user that will become the only entry
+  point to the host: the *gatekeeper*
+* install some pretty restrictive `iptables` rules, with basic flood protection,
+  only the `sshd` port open in input, and only some vital ports open to output
+
+**BE CAREFUL**, once you've applied this role, the target host(s) will be accessible
 by the gatekeeper user only, with public key authentication only (root login and
 password authentication will be disabled). You will have to change your inventory
 and/or command line options to take this into account.
 
-It's recommended that you reboot the targeted server(s) after applying this role.
-
-This role is continuously integrated on [Travis](https://travis-ci.org/fabschurt/ansible-role-ubuntu-secure).
-For now, it's simply syntax-checked against multiple Ansible versions, to check
-for basic compatibility.
+*Note:* this role includes a final step that will reboot the target host(s).
 
 ## Requirements
 
@@ -30,12 +36,17 @@ for basic compatibility.
 
 This role is configurable with the following variables:
 
-* `ubuntu_secure_sshd_port`: the TCP port the SSH server should listen to
+* `ubuntu_secure_sshd_port`: the TCP port that `sshd` will listen to
+* `ubuntu_secure_sshd_max_startups`: the value of the `MaxStartups` config
+  directive in `sshd_config`
+* `ubuntu_secure_iptables_additional_rules`: additional `iptables` rules that
+  will be appended to the default ones (you should use a [literal](https://en.wikipedia.org/wiki/YAML#Block_literals)
+  YAML string here)
 * `ubuntu_secure_gatekeeper_name`: the gatekeeper's username
-* `ubuntu_secure_gatekeeper_password`: the gatekeeper's password (to be able
-  to `sudo`)
+* `ubuntu_secure_gatekeeper_password`: the gatekeeper's password (mandatory if
+  you want to `sudo`)
 * `ubuntu_secure_gatekeeper_public_keys`: a list of local paths to public key
-  files that will be copied to the gatekeeper's `authorized_keys` file
+  files whose content will be copied to the gatekeeper's `authorized_keys` file
 
 See the **Example playbook** section below for a reference of these variables'
 default values.
@@ -50,14 +61,17 @@ The variable values used here reflect the default values declared in `defaults/m
 - hosts: servers
   roles:
     - role: ansible-role-ubuntu-secure
+      ubuntu_secure_sshd_port: 22
+      ubuntu_secure_sshd_max_startups: '5:50:10' # Be sure to use quotes here
+      ubuntu_secure_iptables_additional_rules: ''
       ubuntu_secure_gatekeeper_name: gatekeeper
       ubuntu_secure_gatekeeper_password: '' # You should really override this one, otherwise you won't be able to sudo
       ubuntu_secure_gatekeeper_public_keys: [~/.ssh/id_rsa.pub]
 ```
 
-The `ubuntu_secure_gatekeeper_password` value should be has to be in an encrypted form,
+The `ubuntu_secure_gatekeeper_password` value must be in encrypted form,
 see [here](http://docs.ansible.com/ansible/faq.html#how-do-i-generate-crypted-passwords-for-the-user-module)
-for help.
+for more information.
 
 ## License
 
