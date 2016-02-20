@@ -17,8 +17,11 @@ this role will basically:
 * completely disable IPv6 support (that will be kind of controversial I guess)
 * create a non-root (but *sudoer*) master user that will become the only entry
   point to the host: the *gatekeeper*
-* install some pretty restrictive `iptables` rules, with basic flood protection,
-  only the `sshd` port open in input, and only some vital ports open to output
+* install some pretty restrictive `iptables` rules, including:
+    - `DROP` as default policy
+    - basic ICMP/TCP/UDP flood protection
+    - only the `sshd` input port left open
+    - only some vital output ports left open
 
 **BE CAREFUL**, once you've applied this role, the target host(s) will be accessible
 by the gatekeeper user only, with public key authentication only (root login and
