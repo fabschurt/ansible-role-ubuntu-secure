@@ -11,6 +11,7 @@
     - etc/sysctl.conf
     - etc/modprobe.d/blacklist.conf
     - etc/default/grub
+    - etc/default/rkhunter
 
 - name: Upload firewall (iptables) config
   tags: [config]
