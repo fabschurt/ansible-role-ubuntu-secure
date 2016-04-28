@@ -78,4 +78,4 @@ for more information.
 
 ## License
 
-This package is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+This software package is licensed under the [MIT License](https://opensource.org/licenses/MIT).
