@@ -5,14 +5,15 @@ language: python
 python: 2.7
 
 env:
-  - ANSIBLE_VERSION=2.0.0.2
+  - ANSIBLE_VERSION=2.0.2.0
+  - ANSIBLE_VERSION=2.1.1.0
 
 install:
   - pip install --upgrade pip
   - pip install ansible==$ANSIBLE_VERSION
 
 before_script:
-  - echo 'testing ansible_ssh_host=localhost' > tests/hosts
+  - printf '[test]\ndummy ansible_ssh_host=localhost' > tests/hosts
 
 script:
   - ansible-playbook -i tests/hosts --syntax-check tests/playbook.yml
