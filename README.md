@@ -1,6 +1,6 @@
 # Ubuntu Secure System (14.04)
 
-[![Travis CI](https://img.shields.io/travis/rust-lang/rust.svg)](https://travis-ci.org/fabschurt/ansible-role-ubuntu-secure)
+[![Travis CI](https://img.shields.io/travis/fabschurt/ansible-role-ubuntu-secure.svg)](https://travis-ci.org/fabschurt/ansible-role-ubuntu-secure)
 
 This Ansible role aims at securing a Ubuntu box as much as possible, without
 hindering performance or flexibility too much. The choices made here are
