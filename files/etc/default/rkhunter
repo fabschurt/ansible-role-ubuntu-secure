@@ -6,11 +6,11 @@
 
 # Set this to yes to enable rkhunter daily runs
 # (default: true)
-CRON_DAILY_RUN=""
+CRON_DAILY_RUN="true"
 
 # Set this to yes to enable rkhunter weekly database updates
 # (default: true)
-CRON_DB_UPDATE=""
+CRON_DB_UPDATE="true"
 
 # Set this to yes to enable reports of weekly database updates
 # (default: false)
@@ -18,7 +18,7 @@ DB_UPDATE_EMAIL="true"
 
 # Set this to the email address where reports and run output should be sent
 # (default: root)
-REPORT_EMAIL="root"
+REPORT_EMAIL="root@localhost"
 
 # Set this to yes to enable automatic database updates
 # (default: false)
