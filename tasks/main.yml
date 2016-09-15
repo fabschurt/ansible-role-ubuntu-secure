@@ -2,4 +2,3 @@
 - include: _install.yml
 - include: _config.yml
 - include: _gatekeeper.yml
-- include: _finalize.yml

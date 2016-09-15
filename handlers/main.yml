@@ -1,0 +1,6 @@
+---
+- name: Update GRUB
+  shell: update-grub2 || update-grub
+
+- name: Reboot server
+  shell: reboot
