@@ -3,7 +3,7 @@
   tags: [config]
   copy:
     src: '{{ item }}'
-    dest: '/{{ item }}'
+    dest: '/{{ item }}'
     mode: "{{ (item == 'etc/sudoers')|ternary('0440', '0644') }}"
   with_items:
     - etc/apt/apt.conf.d/
