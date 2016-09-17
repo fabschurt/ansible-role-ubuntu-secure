@@ -2,13 +2,13 @@
 - name: Update GRUB
   shell: 'update-grub2 || update-grub'
 
+- name: Restart networking
+  shell: 'ifdown --exclude=lo --all && sleep 1 && ifup --exclude=lo --all'
+
 - name: Restart SSH
   service:
     name: ssh
     state: restarted
-
-- name: Restart networking
-  shell: 'ifdown --exclude=lo -a && sleep 2 && ifup --exclude=lo -a'
 
 - name: Reboot server
   shell: 'sleep 2 && reboot'
