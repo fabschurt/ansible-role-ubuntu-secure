@@ -48,6 +48,7 @@ iptables -A OUTPUT -m hashlimit --hashlimit-name UDP_OUTPUT_FLOOD --hashlimit-ab
 iptables -A INPUT -p tcp --dport {{ ubuntu_secure_sshd_port }} -j ACCEPT # SSH
 
 # Authorized OUTPUT requests
+iptables -A OUTPUT -p icmp             -j ACCEPT # ICMP
 iptables -A OUTPUT -p tcp --dport 22   -j ACCEPT # SSH
 iptables -A OUTPUT -p tcp --dport 25   -j ACCEPT # SMTP
 iptables -A OUTPUT -p tcp --dport 53   -j ACCEPT # DNS (TCP)
