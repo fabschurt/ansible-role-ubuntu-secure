@@ -23,4 +23,4 @@
     dest: /etc/network/if-pre-up.d/iptables
     mode: 0755
   notify:
-    - Reboot server
+    - Restart networking

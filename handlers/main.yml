@@ -7,6 +7,9 @@
     name: ssh
     state: restarted
 
+- name: Restart networking
+  shell: 'ifdown --exclude=lo -a && sleep 2 && ifup --exclude=lo -a'
+
 - name: Reboot server
   shell: 'sleep 2 && reboot'
   async: 1
