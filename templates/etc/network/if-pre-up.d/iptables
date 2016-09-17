@@ -18,7 +18,7 @@ iptables -P OUTPUT  DROP
 # Drop invalid requests
 iptables -A INPUT -m state --state INVALID -j DROP
 
-# Accept (throttled) ICMP requests
+# Accept (throttled) ping requests
 iptables -N PING_FLOOD_FILTER
 iptables -A INPUT -p icmp --icmp-type echo-request -j PING_FLOOD_FILTER
 iptables -A PING_FLOOD_FILTER -m hashlimit --hashlimit-name PING_FLOOD --hashlimit-above 1/second --hashlimit-burst 1 -j REJECT --reject-with icmp-admin-prohibited
