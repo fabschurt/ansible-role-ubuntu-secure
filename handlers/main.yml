@@ -2,5 +2,13 @@
 - name: Update GRUB
   shell: update-grub2 || update-grub
 
+- name: Restart SSH
+  service:
+    name: ssh
+    state: restarted
+
 - name: Reboot server
-  shell: reboot
+  shell: sleep 2 && reboot
+  async: 1
+  poll: 0
+  ignore_errors: true
