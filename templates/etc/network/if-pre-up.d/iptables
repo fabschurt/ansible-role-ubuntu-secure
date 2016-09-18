@@ -32,13 +32,14 @@ iptables -A OUTPUT -o lo -j ACCEPT
 # Accept (throttled) ping requests
 iptables -N PING_FLOOD_FILTER
 iptables -A INPUT -p icmp --icmp-type echo-request -j PING_FLOOD_FILTER
-iptables -A PING_FLOOD_FILTER -m hashlimit --hashlimit-name PING_FLOOD --hashlimit-above 1/second --hashlimit-burst 1 -j REJECT --reject-with icmp-admin-prohibited
+iptables -A PING_FLOOD_FILTER -m hashlimit --hashlimit-name PING_FLOOD --hashlimit-mode srcip --hashlimit-above 1/second --hashlimit-burst 2 -j REJECT --reject-with icmp-admin-prohibited
 iptables -A PING_FLOOD_FILTER -j ACCEPT
 
 # Basic TCP flood protection
 iptables -A INPUT -p tcp -m connlimit --connlimit-above 20 -j DROP
-iptables -A INPUT -p tcp --syn -m recent --name SYN_FLOOD --set
-iptables -A INPUT -p tcp --syn -m recent --name SYN_FLOOD --rcheck --rttl --seconds 1 --hitcount 6 -j DROP
+iptables -N SYN_FLOOD_FILTER
+iptables -A INPUT -p tcp --syn -j SYN_FLOOD_FILTER
+iptables -A SYN_FLOOD_FILTER -m hashlimit --hashlimit-name SYN_FLOOD --hashlimit-mode srcip --hashlimit-above 5/second -j DROP
 
 # Basic UDP flood protection
 iptables -A INPUT  -m hashlimit --hashlimit-name UDP_INPUT_FLOOD  --hashlimit-above 10/second  -j DROP
