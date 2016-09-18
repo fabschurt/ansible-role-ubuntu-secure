@@ -2,11 +2,6 @@
 - name: Update GRUB
   shell: 'update-grub2 || update-grub'
 
-- name: Restart networking
-  service:
-    name: networking
-    state: restarted
-
 - name: Restart SSH
   service:
     name: ssh
