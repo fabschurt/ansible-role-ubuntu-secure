@@ -18,11 +18,10 @@ iptables -P OUTPUT  DROP
 # Drop invalid requests
 iptables -A INPUT -m state --state INVALID -j DROP
 
-# Accept (throttled) ping requests
-iptables -N PING_FLOOD_FILTER
-iptables -A INPUT -p icmp --icmp-type echo-request -j PING_FLOOD_FILTER
-iptables -A PING_FLOOD_FILTER -m hashlimit --hashlimit-name PING_FLOOD --hashlimit-above 1/second --hashlimit-burst 1 -j REJECT --reject-with icmp-admin-prohibited
-iptables -A PING_FLOOD_FILTER -j ACCEPT
+# Drop invalid TCP packets
+iptables -A INPUT -p tcp --tcp-flags ALL ALL  -j DROP # XMAS
+iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP # NULL
+iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
 
 # Accept related, established and local requests
 iptables -A INPUT  -m state --state RELATED,ESTABLISHED -j ACCEPT
@@ -30,10 +29,11 @@ iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A INPUT  -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 
-# Drop invalid TCP packets
-iptables -A INPUT -p tcp --tcp-flags ALL ALL  -j DROP # XMAS
-iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP # NULL
-iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
+# Accept (throttled) ping requests
+iptables -N PING_FLOOD_FILTER
+iptables -A INPUT -p icmp --icmp-type echo-request -j PING_FLOOD_FILTER
+iptables -A PING_FLOOD_FILTER -m hashlimit --hashlimit-name PING_FLOOD --hashlimit-above 1/second --hashlimit-burst 1 -j REJECT --reject-with icmp-admin-prohibited
+iptables -A PING_FLOOD_FILTER -j ACCEPT
 
 # Basic TCP flood protection
 iptables -A INPUT -p tcp -m connlimit --connlimit-above 20 -j DROP
@@ -41,8 +41,8 @@ iptables -A INPUT -p tcp --syn -m recent --name SYN_FLOOD --set
 iptables -A INPUT -p tcp --syn -m recent --name SYN_FLOOD --rcheck --rttl --seconds 1 --hitcount 6 -j DROP
 
 # Basic UDP flood protection
-iptables -A INPUT  -m hashlimit --hashlimit-name UDP_INPUT_FLOOD  --hashlimit-above 10/second  --hashlimit-burst 1 -j DROP
-iptables -A OUTPUT -m hashlimit --hashlimit-name UDP_OUTPUT_FLOOD --hashlimit-above 100/second --hashlimit-burst 1 -j DROP
+iptables -A INPUT  -m hashlimit --hashlimit-name UDP_INPUT_FLOOD  --hashlimit-above 10/second  -j DROP
+iptables -A OUTPUT -m hashlimit --hashlimit-name UDP_OUTPUT_FLOOD --hashlimit-above 100/second -j DROP
 
 # Authorized INPUT requests
 iptables -A INPUT -p tcp --dport {{ ubuntu_secure_sshd_port }} -j ACCEPT # SSH
