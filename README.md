@@ -15,7 +15,7 @@ this role will basically&nbsp;:
 * enable APT unattended upgrades (`security` and `updates` channels)
 * completely disable IPv6 support (that will be kind of controversial I guess)
 * create a non-root (but *sudoer*) master user that will become the only entry
-  point to the host&nbsp;: the *gatekeeper*
+  point to the system&nbsp;: the *gatekeeper*
 * install some pretty restrictive `iptables` rules, including&nbsp;:
     - `DROP` as default policy
     - basic ICMP/TCP/UDP flood protection
@@ -25,9 +25,11 @@ this role will basically&nbsp;:
 **BE CAREFUL**, once you’ve applied this role, the target host(s) will be accessible
 by the gatekeeper user only, with public key authentication only (root login and
 password authentication will be disabled). You will have to change your inventory
-and/or command line options to take this into account.
+and/or command line options to take this into account. *Note&nbsp;:* I’m currently
+working on a solution to actually avoid fiddling with the inventory as it’s far
+from practical.
 
-*Note&nbsp;:* this role includes a final step that will reboot the target host(s).
+*Note&nbsp;:* some changes induced by this role will trigger a server reboot.
 
 ## Requirements
 
@@ -41,14 +43,15 @@ This role is configurable with the following variables&nbsp;:
 * `ubuntu_secure_sshd_port`&nbsp;: the TCP port that `sshd` will listen to
 * `ubuntu_secure_sshd_max_startups`&nbsp;: the value of the `MaxStartups` config
   directive in `sshd_config`
-* `ubuntu_secure_iptables_additional_rules`&nbsp;: additional `iptables` rules that
-  will be appended to the default ones (you should use a [literal](https://en.wikipedia.org/wiki/YAML#Block_literals)
-  YAML string here)
+* `ubuntu_secure_iptables_additional_rules`&nbsp;: additional `iptables` rules
+  that will be appended to the default ones (you should use a
+  [literal](https://en.wikipedia.org/wiki/YAML#Block_literals) YAML string here)
 * `ubuntu_secure_gatekeeper_name`&nbsp;: the gatekeeper’s username
-* `ubuntu_secure_gatekeeper_password`&nbsp;: the gatekeeper’s password (mandatory if
-  you want to `sudo`)
-* `ubuntu_secure_gatekeeper_public_keys`&nbsp;: a list of local paths to public key
-  files whose content will be copied to the gatekeeper’s `authorized_keys` file
+* `ubuntu_secure_gatekeeper_password`&nbsp;: the gatekeeper’s password (mandatory
+  if you want to `sudo`)
+* `ubuntu_secure_gatekeeper_public_keys`&nbsp;: a list of local paths to public
+  key files whose content will be copied to the gatekeeper’s `authorized_keys`
+  file
 
 See the **Example playbook** section below for a reference of these variables’
 default values.
