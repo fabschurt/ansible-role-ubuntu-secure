@@ -22,12 +22,13 @@ this role will basically&nbsp;:
     - only the `sshd` input port left open
     - only some vital output ports left open
 
-**BE CAREFUL**, once you’ve applied this role, the target hosts will be accessible
-by the gatekeeper user only, with public key authentication only (root login and
-password authentication will be disabled). You will have to change your inventory
-and/or command line options to take this into account. *Note&nbsp;:* I’m currently
-working on a solution to actually avoid fiddling with the inventory as it’s far
-from practical.
+**BE CAREFUL&nbsp;:** once you’ve applied this role, the target hosts will be
+accessible by the gatekeeper user only, via public key authentication only (root
+login and password authentication will be disabled). To simplify the whole
+process and to avoid constantly tinkering with the inventory settings, I’ve
+created another role that automatically handles the authentication method change&nbsp;:
+[`fabschurt.ubuntu-secure-gateway`](https://galaxy.ansible.com/fabschurt/ubuntu-secure-gateway/).
+Please see that role’s page for usage details.
 
 *Note&nbsp;:* some changes induced by this role will trigger a server reboot.
 
