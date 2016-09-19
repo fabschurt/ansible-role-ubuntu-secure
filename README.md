@@ -22,7 +22,7 @@ this role will basically&nbsp;:
     - only the `sshd` input port left open
     - only some vital output ports left open
 
-**BE CAREFUL**, once you’ve applied this role, the target host(s) will be accessible
+**BE CAREFUL**, once you’ve applied this role, the target hosts will be accessible
 by the gatekeeper user only, with public key authentication only (root login and
 password authentication will be disabled). You will have to change your inventory
 and/or command line options to take this into account. *Note&nbsp;:* I’m currently
