@@ -24,3 +24,18 @@
     mode: 0755
   notify:
     - Reboot server
+
+- name: Check if Postfix config file exists
+  tags: [config]
+  stat:
+    path: /etc/postfix/main.cf
+  register: postfix_config_file
+
+- name: Disable ipv6 support in Postfix
+  tags: [config]
+  lineinfile:
+    regexp: '^inet_protocols\s+(?:all|ipv4,\s*ipv6)$'
+    line: 'inet_protocols ipv4'
+    state: present
+    dest: /etc/postfix/main.cf
+  when: postfix_config_file.stat.exists
