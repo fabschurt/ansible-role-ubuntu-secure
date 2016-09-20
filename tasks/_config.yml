@@ -1,5 +1,14 @@
 ---
-- name: Upload custom config files
+- name: Upload GRUB config file
+  tags: [config]
+  template:
+    src: etc/default/grub
+    dest: /etc/default/grub
+    mode: 0644
+  notify:
+    - Update GRUB
+
+- name: Upload miscellaneous config files
   tags: [config]
   copy:
     src: '{{ item }}'
@@ -10,10 +19,8 @@
     - etc/sudoers
     - etc/sysctl.conf
     - etc/modprobe.d/blacklist.conf
-    - etc/default/grub
     - etc/default/rkhunter
   notify:
-    - Update GRUB
     - Reboot server
 
 - name: Upload firewall (iptables) config
