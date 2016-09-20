@@ -1,7 +1,7 @@
 ---
 - name: Upload GRUB config file
   tags: [config]
-  template:
+  copy:
     src: etc/default/grub
     dest: /etc/default/grub
     mode: 0644
@@ -41,8 +41,8 @@
 - name: Disable ipv6 support in Postfix
   tags: [config]
   lineinfile:
-    regexp: '^inet_protocols\s+(?:all|ipv4,\s*ipv6)$'
-    line: 'inet_protocols ipv4'
+    regexp: '^inet_protocols\s*=\s*(?:all|ipv4,\s*ipv6)$'
+    line: 'inet_protocols = ipv4'
     state: present
     dest: /etc/postfix/main.cf
   when: postfix_config_file.stat.exists
