@@ -42,8 +42,8 @@ iptables -A INPUT -p tcp --syn -j SYN_FLOOD_FILTER
 iptables -A SYN_FLOOD_FILTER -m hashlimit --hashlimit-name SYN_FLOOD --hashlimit-mode srcip --hashlimit-above 5/second -j DROP
 
 # Basic UDP flood protection
-iptables -A INPUT  -m hashlimit --hashlimit-name UDP_INPUT_FLOOD  --hashlimit-above 10/second  -j DROP
-iptables -A OUTPUT -m hashlimit --hashlimit-name UDP_OUTPUT_FLOOD --hashlimit-above 100/second -j DROP
+iptables -A INPUT  -m hashlimit --hashlimit-name UDP_INPUT_FLOOD  --hashlimit-above 20/second                       -j DROP
+iptables -A OUTPUT -m hashlimit --hashlimit-name UDP_OUTPUT_FLOOD --hashlimit-above 200/second --hashlimit-burst 10 -j DROP
 
 # Authorized INPUT requests
 iptables -A INPUT -p tcp --dport {{ ubuntu_secure_sshd_port }} -j ACCEPT # SSH
