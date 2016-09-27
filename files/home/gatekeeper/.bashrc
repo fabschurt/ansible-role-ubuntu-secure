@@ -11,4 +11,3 @@ export EDITOR=/usr/bin/vi
 
 # Sensible defaults for some core utilities
 export LESS='--chop-long-lines --hilite-search --jump-target=.5 --ignore-case --RAW-CONTROL-CHARS --tabs=2'
-export GREP_OPTIONS='--color=auto'
