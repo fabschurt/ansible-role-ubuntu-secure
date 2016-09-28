@@ -12,8 +12,5 @@ install:
   - pip install --upgrade pip
   - pip install ansible==$ANSIBLE_VERSION
 
-before_script:
-  - printf '[test]\ndummy ansible_ssh_host=localhost' > tests/hosts
-
 script:
   - ansible-playbook -i tests/hosts --syntax-check tests/playbook.yml

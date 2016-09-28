@@ -1,0 +1,2 @@
+[test]
+dummy ansible_ssh_host=localhost
