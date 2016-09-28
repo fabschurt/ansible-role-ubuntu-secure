@@ -35,7 +35,7 @@ Please see that role’s page for usage details.
 ## Requirements
 
 * Ubuntu remote host(s) with root access
-* Ansible >= 2.0
+* Ansible >= 2.1
 
 ## Role variables
 
