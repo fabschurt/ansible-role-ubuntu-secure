@@ -70,7 +70,7 @@ TCPKeepAlive yes
 #UseLogin no
 
 ClientAliveCountMax 0
-ClientAliveInterval 300
+ClientAliveInterval {{ ubuntu_secure_sshd_idle_timeout }}
 
 MaxStartups {{ ubuntu_secure_sshd_max_startups }}
 #Banner /etc/issue.net
