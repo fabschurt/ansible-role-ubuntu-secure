@@ -70,7 +70,7 @@ The variable values used here reflect the default values declared in `defaults/m
   roles:
     - role: fabschurt.ubuntu-secure
       ubuntu_secure_sshd_port: 222
-      ubuntu_secure_sshd_idle_timeout: 600
+      ubuntu_secure_sshd_idle_timeout: 900
       ubuntu_secure_sshd_max_startups: '5:50:10' # Be sure to use quotes here
       ubuntu_secure_iptables_additional_rules: ''
       ubuntu_secure_gatekeeper_name: gatekeeper
