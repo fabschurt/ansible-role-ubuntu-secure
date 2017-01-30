@@ -4,7 +4,7 @@
 
 # Sudoer aliases
 alias sudo='sudo '
-alias supersaiyan='sudo -i -u root'
+alias supersaiyan='sudo su -p'
 
 # Default editor
 export EDITOR=/usr/bin/vi
