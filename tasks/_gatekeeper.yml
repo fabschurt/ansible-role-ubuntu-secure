@@ -17,14 +17,19 @@
     state: present
   with_items: '{{ ubuntu_secure_gatekeeper_public_keys }}'
 
-- name: Upload custom dotfiles to gatekeeper's home
+- name: Upload custom dotfiles to gatekeeper's and root's home
   tags: [gatekeeper]
   copy:
-    src: home/gatekeeper/
-    dest: '/home/{{ ubuntu_secure_gatekeeper_name }}'
-    owner: '{{ ubuntu_secure_gatekeeper_name }}'
-    group: '{{ ubuntu_secure_gatekeeper_name }}'
+    src: home/
+    dest: '{{ item.dest }}'
+    owner: '{{ item.owner }}'
+    group: '{{ item.owner }}'
     mode: 0600
+  with_items:
+    - dest: '/home/{{ ubuntu_secure_gatekeeper_name }}'
+      owner: '{{ ubuntu_secure_gatekeeper_name }}'
+    - dest: /root
+      owner: root
 
 - name: Upload custom sshd config
   tags: [gatekeeper]
