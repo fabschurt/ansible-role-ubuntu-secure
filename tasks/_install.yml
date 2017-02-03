@@ -3,6 +3,6 @@
   tags: [install]
   apt:
     name: '{{ item }}'
-    state: present
+    state: latest
   with_items:
     - rkhunter
