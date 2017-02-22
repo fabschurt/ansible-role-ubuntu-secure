@@ -9,12 +9,7 @@
     shell: /bin/bash
     comment: The Almighty Gatekeeper
 
-- name: Add authorized SSH public keys for the gatekeeper
-  tags: [gatekeeper]
-  authorized_key:
-    user: '{{ ubuntu_secure_gatekeeper_name }}'
-    key: "{{ lookup('file', item) }}"
-    state: present
+- include: includes/_authorized_key.yml keyfile_path={{ item }}
   with_items: '{{ ubuntu_secure_gatekeeper_public_keys }}'
 
 - name: Upload custom dotfiles to gatekeeper's and root's home
