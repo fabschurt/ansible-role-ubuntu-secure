@@ -1,2 +1,2 @@
 [test]
-localhost ansible_connection=local
+localhost ansible_become=true ansible_connection=local
