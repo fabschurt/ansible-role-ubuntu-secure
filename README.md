@@ -14,21 +14,27 @@ this role will basically&nbsp;:
 
 * enable APT unattended upgrades (`security` and `updates` channels)
 * completely disable IPv6 support (that will be kind of controversial I guess)
-* create a non-root (but *sudoer*) master user that will become the only entry
-  point to the system&nbsp;: the *gatekeeper*
+* disable root login and password authentication, and set the listening port
+  of the SSH server to an alternative number
+* create a non-root *sudoer* user that will become the only entry point to the
+  system&nbsp;: the *gatekeeper*
 * install some pretty restrictive `iptables` rules, including&nbsp;:
     - `DROP` as default policy
     - basic ICMP/TCP/UDP flood protection
     - only the `sshd` input port left open
     - only some vital output ports left open
 
-**BE CAREFUL&nbsp;:** once you’ve applied this role, the target hosts will be
-accessible by the gatekeeper user only, via public key authentication only (root
-login and password authentication will be disabled). To simplify the whole
-process and to avoid constantly tinkering with the inventory settings, I’ve
-created another role that automatically handles the authentication method change&nbsp;:
-[`fabschurt.ubuntu-secure-gateway`](https://galaxy.ansible.com/fabschurt/ubuntu-secure-gateway/).
-Please see that role’s page for usage details.
+**ATTENTION&nbsp;:** immediately after you’ve applied this role to a host, you
+will be locked out of it (see the description of applied changes above). You will
+have to edit the connection attributes of the host in your inventory&nbsp;:
+
+```
+[group_name]
+…
+host_name ansible_port=ubuntu_secure_sshd_port ansible_user=ubuntu_secure_gatekeeper_name ansible_become=true
+```
+
+(See below for a description of `ubuntu_secure_sshd_port` and `ubuntu_secure_gatekeeper_name`.)
 
 *Note&nbsp;:* some changes induced by this role will trigger a server reboot.
 

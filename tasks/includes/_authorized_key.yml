@@ -1,5 +1,5 @@
 ---
-- name: Check if public key file exists
+- name: Check if local public key file exists
   tags: [gatekeeper]
   stat:
     path: '{{ keyfile_path }}'
