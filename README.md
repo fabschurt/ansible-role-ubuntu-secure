@@ -41,7 +41,7 @@ host_name ansible_port=ubuntu_secure_sshd_port ansible_user=ubuntu_secure_gateke
 ## Requirements
 
 * Ubuntu remote host(s) with root access
-* Ansible >= 2.1
+* Ansible >= 2.0
 
 ## Role variables
 
