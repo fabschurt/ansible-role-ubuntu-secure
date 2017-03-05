@@ -7,7 +7,8 @@ hindering performance or flexibility too much. The choices made here are
 inevitably biased and opinionated, but I’d gladly study proposals to make
 this role more universal.
 
-Full compatibility has been tested on **Ubuntu 16.04** only.
+This role is targeted at **Ubuntu 16.04**, but I guess it should work on any
+recent Ubuntu flavor.
 
 There’s still a lot of work to do, but we’ve got a good start here. For now,
 this role will basically&nbsp;:
