@@ -26,8 +26,10 @@ this role will basically&nbsp;:
     - only some vital output ports left open
 
 **ATTENTION&nbsp;:** immediately after you’ve applied this role to a host, you
-will be locked out of it (see the description of applied changes above). You will
-have to edit the connection attributes of the host in your inventory&nbsp;:
+will be locked out of it (see the description of applied changes above). I’m
+working on a solution in order to have all this handled automatically, but as a
+temporary workaround, you will have to edit the connection attributes of the
+host in your inventory&nbsp;:
 
 ```
 [group_name]
