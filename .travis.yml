@@ -16,4 +16,4 @@ install:
   - ansible --version
 
 script:
-  - ansible-playbook --become --check tests/playbook.yml
+  - ansible-playbook tests/playbook.yml
