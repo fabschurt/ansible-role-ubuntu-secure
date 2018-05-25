@@ -1,33 +1,44 @@
 ---
-- name: Upload GRUB config file
-  tags: [config]
-  copy:
-    src: etc/default/grub
-    dest: /etc/default/grub
-    mode: 0644
-  notify:
-    - Update GRUB
-
-- name: Upload miscellaneous config files
-  tags: [config]
-  copy:
-    src: '{{ item }}'
-    dest: '/{{ item }}'
-    mode: "{{ (item == 'etc/sudoers')|ternary('0440', '0644') }}"
+- name: Tweak sudo config
+  lineinfile:
+    path: /etc/sudoers
+    line: '{{ item }}'
+    state: present
   with_items:
-    - etc/apt/apt.conf.d/
-    - etc/sudoers
-    - etc/sysctl.conf
-    - etc/modprobe.d/blacklist.conf
-    - etc/default/rkhunter
-  notify:
-    - Reboot server
+    - 'Defaults env_keep+="SSH_AUTH_SOCK"'
+    - 'Defaults mail_no_perms'
 
-- name: Upload firewall (iptables) config
-  tags: [config]
-  template:
-    src: etc/network/if-pre-up.d/iptables
-    dest: /etc/network/if-pre-up.d/iptables
-    mode: 0755
+- name: Harden SSH config
+  lineinfile:
+    path: /etc/ssh/sshd_config
+    regexp: '{{ item.regexp }}'
+    line: '{{ item.line }}'
+    state: present
+  with_items:
+    -
+      regexp: '^#?Port '
+      line: 'Port {{ ssh_alternate_port }}'
+    -
+      regexp: '^#?PermitRootLogin '
+      line: 'PermitRootLogin no'
+    -
+      regexp: '^#?PasswordAuthentication '
+      line: 'PasswordAuthentication no'
+    -
+      regexp: '^#?X11Forwarding '
+      line: 'X11Forwarding no'
+    -
+      regexp: '^#?ClientAliveInterval '
+      line: 'ClientAliveInterval 300'
+    -
+      regexp: '^#?MaxStartups '
+      line: 'MaxStartups 5:50:10'
   notify:
-    - Reboot server
+    - fabschurt.ubuntu.secure.sshd_config_added
+
+- name: Set up some restrictive iptables rules
+  template:
+    src: firewall
+    dest: /etc/network/if-pre-up.d/firewall
+    mode: 'a+x'
+  notify: fabschurt.ubuntu.secure.iptables_rules_added

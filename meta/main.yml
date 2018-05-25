@@ -1,11 +1,12 @@
 ---
 galaxy_info:
   author: Fabien Schurter
-  description: 'A complete, opinionated security kit for Ubuntu.'
+  description: 'An Ansible role providing an opinionated security kit for Ubuntu.'
   license: MIT
-  min_ansible_version: 2.0
+  min_ansible_version: 2.4
   platforms:
     - name: Ubuntu
-      versions: [xenial]
-  galaxy_tags: [ubuntu, security, secure, bootstrap, monitoring]
-dependencies: []
+      versions:
+        - all
+dependencies:
+  - fabschurt.ubuntu-base

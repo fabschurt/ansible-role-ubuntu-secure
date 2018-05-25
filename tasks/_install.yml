@@ -1,8 +1,0 @@
----
-- name: Install needed packages
-  tags: [install]
-  apt:
-    name: '{{ item }}'
-    state: latest
-  with_items:
-    - rkhunter

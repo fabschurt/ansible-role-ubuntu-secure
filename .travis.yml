@@ -6,14 +6,14 @@ language: python
 python: 2.7_with_system_site_packages
 
 env:
-  - ANSIBLE_VERSION=2.0.0
-  - ANSIBLE_VERSION=2.1.0
-  - ANSIBLE_VERSION=2.2.0
+  - ANSIBLE_VERSION=2.4.0
+  - ANSIBLE_VERSION=2.5.0
 
 install:
   - pip install --upgrade pip
   - pip install ansible~="$ANSIBLE_VERSION"
   - ansible --version
+  - ansible-galaxy install -r roles.txt
 
 script:
-  - ansible-playbook tests/playbook.yml
+  - ansible-playbook --syntax-check tests/playbook.yml

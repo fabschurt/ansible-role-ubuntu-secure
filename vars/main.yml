@@ -1,0 +1,4 @@
+---
+static:
+  installed_packages:
+    - ifupdown
