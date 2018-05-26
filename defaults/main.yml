@@ -1,8 +1,6 @@
 ---
-ubuntu_secure_sshd_port: 222
-ubuntu_secure_sshd_idle_timeout: 900
-ubuntu_secure_sshd_max_startups: '5:50:10'
-ubuntu_secure_iptables_additional_rules: ''
-ubuntu_secure_gatekeeper_name: gatekeeper
-ubuntu_secure_gatekeeper_password: ''
-ubuntu_secure_gatekeeper_public_keys: [~/.ssh/id_rsa.pub]
+ssh_alternate_port: 222
+iptables_additional_rules: ''
+admin_name: admin
+admin_password: ''
+admin_pubkey_path: ~/.ssh/id_rsa.pub

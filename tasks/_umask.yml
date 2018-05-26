@@ -1,0 +1,29 @@
+- name: Make home directories 0700 by default
+  lineinfile:
+    path: /etc/adduser.conf
+    regexp: '^DIR_MODE='
+    line: 'DIR_MODE=0700'
+    state: present
+
+- name: Enforce umask usage in PAM config
+  lineinfile:
+    path: '{{ item }}'
+    regexp: '\spam_umask.so$'
+    line: 'session required pam_umask.so'
+    state: present
+  with_items:
+    - /etc/pam.d/common-session
+    - /etc/pam.d/common-session-noninteractive
+
+- name: Enforce secure umask in login.defs
+  lineinfile:
+    path: /etc/login.defs
+    regexp: '^UMASK\s'
+    line: 'UMASK 077'
+    state: present
+
+- name: Enforce secure umask in bash.bashrc
+  lineinfile:
+    path: /etc/bash.bashrc
+    line: 'umask 077'
+    state: present

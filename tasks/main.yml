@@ -1,4 +1,16 @@
 ---
-- include: _install.yml
-- include: _config.yml
-- include: _gatekeeper.yml
+- import_tasks: _packages.yml
+  tags:
+    - packages
+
+- import_tasks: _config.yml
+  tags:
+    - config
+
+- import_tasks: _umask.yml
+  tags:
+    - umask
+
+- import_tasks: _admin.yml
+  tags:
+    - admin
