@@ -1,16 +1,16 @@
 ---
-- import_tasks: _packages.yml
+- import_tasks: packages.yml
   tags:
     - packages
 
-- import_tasks: _config.yml
+- import_tasks: config.yml
   tags:
     - config
 
-- import_tasks: _umask.yml
+- import_tasks: umask.yml
   tags:
     - umask
 
-- import_tasks: _admin.yml
+- import_tasks: admin.yml
   tags:
     - admin
