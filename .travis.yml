@@ -13,7 +13,7 @@ install:
   - pip install --upgrade pip
   - pip install ansible~="$ANSIBLE_VERSION"
   - ansible --version
-  - ansible-galaxy install -r roles.txt
+  - ansible-galaxy install -r ansible-roles.yml
 
 script:
   - ansible-playbook --syntax-check tests/playbook.yml
