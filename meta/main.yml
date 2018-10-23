@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: ubuntu_secure
   author: Fabien Schurter
   description: An Ansible role providing an opinionated security kit for Ubuntu 18.04.
   license: MIT
