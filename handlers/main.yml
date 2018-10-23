@@ -1,11 +1,11 @@
 ---
-- name: Restart SSH
+- name: Restart SSH daemon
   listen: fabschurt.ubuntu.secure.sshd_config_added
   service:
     name: ssh
     state: restarted
 
-- name: Restart network
+- name: Restart network stack
   listen: fabschurt.ubuntu.secure.iptables_rules_added
   shell: 'ifdown -a --exclude=lo; sleep 3; ifup -a --exclude=lo'
   async: 15

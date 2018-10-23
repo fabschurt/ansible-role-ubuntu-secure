@@ -29,6 +29,7 @@ iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
 iptables -A INPUT -i lo -j ACCEPT
 iptables -A OUTPUT -o lo -j ACCEPT
 
+{% if iptables_flood_protection_enabled %}
 # Accept (throttled) ping requests
 iptables -N PING_FLOOD_FILTER
 iptables -A INPUT -p icmp --icmp-type echo-request -j PING_FLOOD_FILTER
@@ -44,6 +45,7 @@ iptables -A SYN_FLOOD_FILTER -m hashlimit --hashlimit-name SYN_FLOOD --hashlimit
 # Basic UDP flood protection
 iptables -A INPUT -m hashlimit --hashlimit-name UDP_INPUT_FLOOD --hashlimit-above 20/second -j DROP
 iptables -A OUTPUT -m hashlimit --hashlimit-name UDP_OUTPUT_FLOOD --hashlimit-above 200/second --hashlimit-burst 10 -j DROP
+{% endif %}
 
 # Authorized INPUT requests
 iptables -A INPUT -p tcp --dport {{ ssh_alternate_port }} -j ACCEPT # SSH

@@ -22,7 +22,7 @@ Here’s a (non-exhaustive) list of the changes that it will implement:
     - only the SSH input port will be left open
     - only some vital output ports will be left open
 * a secure *umask* value of 077 will be (tentatively) enforced
-* the existence of a sudoer, public-key-authenticating main admin user will be
+* the existence of a public-key-authenticated main *sudoer* admin user will be
   guaranteed
 
 **CAUTION:** as mentioned earlier, the default SSH port will be changed, so
@@ -41,6 +41,9 @@ think about a better, more automated solution.
 This role is configurable with the following variables:
 
 * `ssh_alternate_port`: the TCP port that the SSH daemon will listen to
+* `iptables_flood_protection_enabled`: whether or not the flood protection rules
+  should be added to `iptables` (you might want to turn them off if you experience
+  performance issues or weird behavior)
 * `iptables_additional_rules`: additional `iptables` rules that will be appended
   to the default ones (you should use a YAML [block literal](https://en.wikipedia.org/wiki/YAML#Indented_delimiting)
   string here)
@@ -66,6 +69,7 @@ already. The variable values used here reflect the default values declared in
   roles:
     - role: fabschurt.ubuntu-secure
       ssh_alternate_port: 222 # I highly recommend you override this one with a custom value
+      iptables_flood_protection_enabled: true
       iptables_additional_rules: ''
       admin_name: admin
       admin_password: '' # You should really override this one, otherwise you won’t be able to sudo
