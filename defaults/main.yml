@@ -1,5 +1,6 @@
 ---
 ssh_alternate_port: 222
+iptables_flood_protection_enabled: true
 iptables_additional_rules: ''
 admin_name: admin
 admin_password: ''
