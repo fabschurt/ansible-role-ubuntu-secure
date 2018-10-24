@@ -60,8 +60,8 @@ these variables’ default values.
 ## Example playbook
 
 This is an example playbook that demonstrates how you would use the role,
-provided that you’ve [installed](https://galaxy.ansible.com/intro#download) it
-already. The variable values used here reflect the default values declared in
+provided that you’ve [installed](https://galaxy.ansible.com/docs/using/installing.html)
+it already. The variable values used here reflect the default values declared in
 `defaults/main.yml`:
 
 ```yaml
