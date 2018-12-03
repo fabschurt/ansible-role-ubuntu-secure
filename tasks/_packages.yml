@@ -1,5 +1,6 @@
 ---
 - name: Install required packages
   apt:
-    name: '{{ static.installed_packages }}'
+    name:
+      - ifupdown
     state: latest
