@@ -1,7 +1,5 @@
 ---
-dist: trusty
-sudo: required
-
+dist: xenial
 language: python
 python: '2.7'
 
@@ -12,10 +10,9 @@ env:
   - ANSIBLE_VERSION=2.7.0
 
 install:
-  - pip install --upgrade pip
   - pip install ansible~="$ANSIBLE_VERSION"
   - ansible --version
   - ansible-galaxy install -r ansible-roles.yml
 
 script:
-  - ansible-playbook --syntax-check tests/playbook.yml
+  - ansible-playbook -i tests/hosts --syntax-check tests/playbook.yml
