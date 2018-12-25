@@ -1,4 +1,4 @@
-# Ansible :: Ubuntu secure system
+# Ansible Ubuntu Secure
 
 [![Travis CI](https://img.shields.io/travis/fabschurt/ansible-role-ubuntu-secure/master.svg)](https://travis-ci.org/fabschurt/ansible-role-ubuntu-secure)
 
