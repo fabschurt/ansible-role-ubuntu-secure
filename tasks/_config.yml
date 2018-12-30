@@ -34,11 +34,11 @@
       regexp: '^#?MaxStartups '
       line: 'MaxStartups 5:50:10'
   notify:
-    - fabschurt.ubuntu.secure.sshd_config_added
+    - sshd_config_added
 
 - name: Set up some restrictive iptables rules
   template:
     src: firewall
     dest: /etc/network/if-pre-up.d/firewall
     mode: 'a+x'
-  notify: fabschurt.ubuntu.secure.iptables_rules_added
+  notify: iptables_rules_added

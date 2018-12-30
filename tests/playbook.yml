@@ -2,3 +2,5 @@
 - hosts: ansible-vm
   roles:
     - role: ../ansible-role-ubuntu-secure
+      ssh_alternate_port: 22
+      admin_password: '$6$7WqkumeHVOZWq$sqPsAaC2q4BC5N6hMATFjpDtKrRdq/zvsSUH.9UrK53zL11iz/aJt3npaeC.T.SjiCCUqfQ7wsqNs13jUgDxi0' # test
