@@ -21,7 +21,7 @@ Here’s a (non-exhaustive) list of the changes that it will implement:
     - basic ICMP/TCP/UDP flood protection
     - only the SSH input port will be left open
     - only some vital output ports will be left open
-* a secure *umask* value of 077 will be (tentatively) enforced
+* a secure (configurable) *umask* value of 077 will be (tentatively) enforced
 * the existence of a public-key-authenticated main *sudoer* admin user will be
   guaranteed
 
