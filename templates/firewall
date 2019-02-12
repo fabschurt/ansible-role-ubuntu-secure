@@ -48,7 +48,7 @@ iptables -A OUTPUT -m hashlimit --hashlimit-name UDP_OUTPUT_FLOOD --hashlimit-ab
 {% endif %}
 
 # Authorized INPUT requests
-iptables -A INPUT -p tcp --dport {{ ssh_alternate_port }} -j ACCEPT # SSH
+iptables -A INPUT -p tcp --dport {{ ssh_port }} -j ACCEPT # SSH
 
 # Authorized OUTPUT requests
 iptables -A OUTPUT -p icmp -j ACCEPT # ICMP

@@ -1,7 +1,7 @@
 ---
-ssh_alternate_port: 222
+ssh_port: 22
 iptables_flood_protection_enabled: true
 iptables_additional_rules: ''
 admin_name: admin
 admin_password: ''
-admin_pubkey_path: ~/.ssh/id_rsa.pub
+admin_pubkey_path: ~

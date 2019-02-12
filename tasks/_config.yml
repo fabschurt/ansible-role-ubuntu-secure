@@ -17,7 +17,7 @@
   with_items:
     -
       regexp: '^#?Port '
-      line: 'Port {{ ssh_alternate_port }}'
+      line: 'Port {{ ssh_port }}'
     -
       regexp: '^#?PermitRootLogin '
       line: 'PermitRootLogin no'

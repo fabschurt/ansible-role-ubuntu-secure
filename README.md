@@ -40,7 +40,7 @@ think about a better, more automated solution.
 
 This role is configurable with the following variables:
 
-* `ssh_alternate_port`: the TCP port that the SSH daemon will listen to
+* `ssh_port`: the TCP port that the SSH daemon will listen to
 * `iptables_flood_protection_enabled`: whether or not the flood protection rules
   should be added to `iptables` (you might want to turn them off if you experience
   performance issues or weird behavior)
@@ -68,12 +68,12 @@ it already. The variable values used here reflect the default values declared in
 - hosts: …
   roles:
     - role: fabschurt.ubuntu-secure
-      ssh_alternate_port: 222 # I highly recommend you override this one with a custom value
+      ssh_port: 22 # I highly recommend that you override this one with a custom value
       iptables_flood_protection_enabled: true
       iptables_additional_rules: ''
       admin_name: admin
       admin_password: '' # You should really override this one, otherwise you won’t be able to sudo
-      admin_pubkey_path: ~/.ssh/id_rsa.pub
+      admin_pubkey_path: ~ # You should really override this one, otherwise you won’t be able to log in with the admin user
 ```
 
 ## License

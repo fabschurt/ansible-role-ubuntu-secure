@@ -9,42 +9,12 @@
     append: true
     shell: /bin/bash
 
-- name: Try to import the admin’s public key from a URL
+- name: Authorize public key for logging in as the admin user
   block:
-    - name: Fetch the key from the URL
-      uri:
-        url: '{{ admin_pubkey_path }}'
-        return_content: true
-      register: pubkey
-
-    - name: Make sure the key is valid
-      fail:
-        msg: 'Invalid public key'
-      when: pubkey.content is not match('^ssh-[a-z]+ ')
-
     - name: Authorize the key
       authorized_key:
         user: '{{ admin_name }}'
-        key: '{{ pubkey.content }}'
+        key: '{{ admin_pubkey_path }}'
         state: present
         exclusive: true
-  when: admin_pubkey_path is match('^https?://')
-
-- name: Try to import the admin’s public key from a local file
-  block:
-    - name: Check if the key exists as a local path
-      local_action: stat path='{{ admin_pubkey_path }}'
-      register: pubkey_stat
-
-    - name: Make sure the key is valid
-      fail:
-        msg: 'Public key not found or invalid'
-      when: not pubkey_stat.stat.exists or lookup('file', admin_pubkey_path) is not match('^ssh-[a-z]+ ')
-
-    - name: Authorize the key
-      authorized_key:
-        user: '{{ admin_name }}'
-        key: "{{ lookup('file', admin_pubkey_path) }}"
-        state: present
-        exclusive: true
-  when: admin_pubkey_path is not match('^https?://')
+  when: admin_pubkey_path is not none
