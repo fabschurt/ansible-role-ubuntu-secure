@@ -19,11 +19,11 @@
   lineinfile:
     path: /etc/login.defs
     regexp: '^UMASK\s'
-    line: 'UMASK 077'
+    line: 'UMASK {{ umask_value }}'
     state: present
 
 - name: Enforce secure umask in bash.bashrc
   lineinfile:
     path: /etc/bash.bashrc
-    line: 'umask 077'
+    line: 'umask {{ umask_value }}'
     state: present
