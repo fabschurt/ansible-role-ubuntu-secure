@@ -9,4 +9,5 @@ galaxy_info:
     - name: Ubuntu
       versions: [bionic]
 dependencies:
-  - fabschurt.ubuntu_base
+  - src: fabschurt.ubuntu_base
+    version: master
