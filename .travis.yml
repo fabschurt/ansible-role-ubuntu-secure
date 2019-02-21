@@ -12,7 +12,7 @@ env:
 install:
   - pip install ansible~="$ANSIBLE_VERSION"
   - ansible --version
-  - ansible-galaxy install -r ansible-roles.yml
+  - ansible-galaxy install -r ansible-requirements.yml
 
 script:
   - ansible-playbook --syntax-check tests/playbook.yml
